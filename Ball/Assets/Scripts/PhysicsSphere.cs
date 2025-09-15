@@ -8,10 +8,16 @@ public class PhysicsSphere : MonoBehaviour
     private Vector3 acceleration, velocity;
     private const float gravity = 9.81f;
 
-    public float Radius { get { return transform.localScale.x / 2f; } internal set
+    public float Radius 
+    { get 
+        { 
+            return transform.localScale.x / 2f; 
+        } 
+     internal set
         {
             transform.localScale = value * 2 * Vector3.one;
-        } }
+        }
+    }
 
     void Start()
     {
