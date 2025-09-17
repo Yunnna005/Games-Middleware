@@ -7,6 +7,7 @@ public class PhysicsSphere : MonoBehaviour
     PhysicsPlane plane;
     private Vector3 acceleration, velocity;
     private const float gravity = 9.81f;
+    float CoR = 0.5f;
 
     public float Radius 
     { get 
@@ -28,14 +29,24 @@ public class PhysicsSphere : MonoBehaviour
 
     void Update()
     {
+        Vector3 previousPosition = transform.position;
         velocity += acceleration * Time.deltaTime; 
         transform.position += velocity * Time.deltaTime;
 
         if(plane.isCollidingWith(this))
-        {
+        {   /*
+            transform.position -= velocity * Time.deltaTime;
             Vector3 vel_parallel = Utils.parallelTo(velocity, plane.normal);
             Vector3 vel_perpendicullar = Utils.perpendicularTo(velocity, plane.normal);
-            velocity = -vel_parallel + vel_perpendicullar;
+            velocity = -CoR * vel_parallel + vel_perpendicullar;
+            */
+            float timeInterval = Time.deltaTime;
+            float D0 = Utils.distanceToPlane(previousPosition, plane) - Radius;
+            float D1 = Utils.distanceToPlane(transform.position, plane) - Radius;
+            float totalDistance = D1 - D0;
+            float speed = (totalDistance)/timeInterval;
+            float ToI = -D0/speed;
+
         }
     }
 }
