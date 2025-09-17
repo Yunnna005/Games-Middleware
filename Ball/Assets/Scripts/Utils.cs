@@ -14,5 +14,11 @@ namespace Assets.Scripts
         {
             return v - parallelTo(v, n);
         }
+
+        internal static float distanceToPlane(Vector3 point, PhysicsPlane p)
+        {
+            Vector3 v = point - p.transform.position;
+            return Vector3.Dot(v, p.normal);
+        }
     }
 }
