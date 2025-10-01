@@ -22,6 +22,10 @@ public class PhysicsSphere : MonoBehaviour, IPhysical
             transform.localScale = value * 2 * Vector3.one;
         }
     }
+    
+    /*
+    public float mass = 1.0f;
+    */
 
     void Start()
     {
@@ -92,7 +96,36 @@ public class PhysicsSphere : MonoBehaviour, IPhysical
 
         if (other is PhysicsSphere)
         {
+            //calculate ToI
             PhysicsSphere sphere = other as PhysicsSphere;
+            //float D0 = Vector3.Distance(previousPosition, sphere.previousPosition) - Radius -sphere.Radius: //distance betwwen 2 spheres
+            //float D1 = Vector3.Distance(transform.position, sphere.transform.position) - Radius -sphere.Radius: 
+            /*
+            float totalDistance = D1 - D0;
+            float speed = (totalDistance) / timeInterval;
+            float ToI = -D0 / speed;
+            
+            Vector3 velAtToI = previousVelocity + acceleration * ToI;
+            Vector3 posAtToI = previousPosition + velAtToI * ToI;
+
+            Vector3 velAtToIOther = sphere.previousVelocity + sphere.acceleration * ToI;
+            Vector3 posAtToIOther = sphere.previousPosition + sphere.velAtToI * ToI;
+            
+            Vector3 normal = (posAtToI - pasAtToIOther).normalized;
+
+            Vector3 parVel = Utils.parallelTo(velAtToI, normal);
+            Vector3 perpVel = Utils.perpendicularTo(velAtToI, normal);
+            
+
+            Vector3 parVelOther = Utils.parallelTo(velAtToIOther, sphere.normal);
+            Vector3 perpVelOther = Utils.perpendicularTo(velAtToIOther, sphere.normal);
+
+            Vector3 velPerpAfter = (momentum formula)V1;
+            Vector3 velPerpAfterOther = (momentum formula)V2;
+            Vector3 velAfter = -CoR * parVel + perpVelAfter;
+            Vector3 newVel = -CoR * parVelOther + perpVelAfterOther;
+            */
+            
             timeInterval = Time.deltaTime;
 
             Vector3 deltaPos = position - sphere.transform.position;
