@@ -14,6 +14,8 @@ public class PhysicsPlane : MonoBehaviour, IPhysical
         } 
     }
 
+    public int rank => 0;
+
     public bool isColliding(IPhysical other)
     {
         if (other is PhysicsPlane plane)
@@ -31,12 +33,12 @@ public class PhysicsPlane : MonoBehaviour, IPhysical
 
     public void overrideAfterCollision(Vector3 pos, Vector3 vel)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void resolvedVelosityForCollisionWith(IPhysical other, ref Vector3 position, ref Vector3 velocity)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     internal bool isCollidingWith(PhysicsSphere sphere)

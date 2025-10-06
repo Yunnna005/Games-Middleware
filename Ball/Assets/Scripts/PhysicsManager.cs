@@ -26,15 +26,28 @@ public class PhysicsManager : MonoBehaviour
     {
         for(int i = 0; i< allObjects.Count-1; i++)
         {
-            for (int j = 1; j< allObjects.Count; j++)
+            for (int j = i+1; j< allObjects.Count; j++)
             {
-                if (allObjects[i].isColliding(allObjects[j]))
+                Vector3 pos = Vector3.zero, vel = Vector3.zero;
+                if (allObjects[i].rank >= allObjects[j].rank)
                 {
-                    Vector3 pos = Vector3.zero, vel = Vector3.zero;
-                    allObjects[i].resolvedVelosityForCollisionWith(allObjects[j], ref pos, ref vel);
-                    allObjects[j].overrideAfterCollision(pos, vel);
-
+                 
+                    if (allObjects[i].isColliding(allObjects[j]))
+                    {
+                        allObjects[i].resolvedVelosityForCollisionWith(allObjects[j], ref pos, ref vel);
+                        allObjects[j].overrideAfterCollision(pos, vel);
+                    }
                 }
+                else
+                {
+                    if (allObjects[j].isColliding(allObjects[i]))
+                    {
+                        allObjects[j].resolvedVelosityForCollisionWith(allObjects[i], ref pos, ref vel);
+                        allObjects[i].overrideAfterCollision(pos, vel);
+                    }
+                }
+
+                
             }
         }
     }
